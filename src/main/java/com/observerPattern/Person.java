@@ -11,6 +11,7 @@ public class Person implements Observer{
         return this.Name;
     }
 
+    @Override
     public void update(Mail mail){
         if(mail.getReceiverName().equals(this.Name)) System.out.print(mail.getMailContent());
     }

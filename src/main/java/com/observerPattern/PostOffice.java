@@ -9,14 +9,17 @@ public class PostOffice implements Subject {
         notification(mail);
     }
 
+    @Override
     public void subscribeBy(Observer observer){
         subscriptionList.add(observer);
     }
 
+    @Override
     public void unsubscribeBy(Observer observer){
         subscriptionList.remove(observer);
     }
 
+    @Override
     public void notification(Mail mail){
         subscriptionList.forEach(subscribePerson->subscribePerson.update(mail));
     }

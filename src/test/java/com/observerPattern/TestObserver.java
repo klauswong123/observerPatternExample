@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class TestObserver {
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
@@ -21,8 +22,8 @@ public class TestObserver {
         Person Jason = new Person("Jason");
         Person Klaus = new Person("Klaus");
         PostOffice hkPostOffice= new PostOffice();
-        hkPostOffice.subscriptBy(Jason);
-        hkPostOffice.subscriptBy(Klaus);
+        hkPostOffice.subscribeBy(Jason);
+        hkPostOffice.subscribeBy(Klaus);
         String mailSubject = "Greeting";
         String mailBody = "Hi Jason, i heard that you are a very good singer.";
         //when
@@ -41,8 +42,8 @@ public class TestObserver {
         Person Jason = new Person("Jason");
         Person Klaus = new Person("Klaus");
         PostOffice hkPostOffice= new PostOffice();
-        hkPostOffice.subscriptBy(Jason);
-        hkPostOffice.subscriptBy(Klaus);
+        hkPostOffice.subscribeBy(Jason);
+        hkPostOffice.subscribeBy(Klaus);
         String mailSubject = "Greeting";
         String mailBody = "Hi Klaus, of course, I am the best singer ever";
         //when
@@ -53,5 +54,23 @@ public class TestObserver {
                 "Receiver: Jason\n" +
                 "Subject: Greeting\n" +
                 "Hi Jason, i heard that you are a very good singer.",systemOut());
+    }
+
+    @Test
+    public void should_return_null_when_send_new_mail_given_unsubscribePerson_postOffice_and_mail(){
+        //given
+        Person Jason = new Person("Jason");
+        Person Klaus = new Person("Klaus");
+        PostOffice hkPostOffice= new PostOffice();
+        hkPostOffice.subscribeBy(Jason);
+        hkPostOffice.subscribeBy(Klaus);
+        String mailSubject = "Greeting";
+        String mailBody = "Hi Jason, really?";
+        hkPostOffice.unsubscribeBy(Jason);
+        //when
+        Mail newMailToJason = new Mail(Klaus.getName(),Jason.getName(),mailSubject,mailBody);
+        hkPostOffice.getNewMail(newMailToJason);
+        //should
+        assertEquals("",systemOut());
     }
 }

@@ -6,17 +6,23 @@ public class Main {
         Person Jason = new Person("Jason");
         Person Klaus = new Person("Klaus");
         PostOffice hkPostOffice= new PostOffice();
-        hkPostOffice.subscriptBy(Jason);
-        hkPostOffice.subscriptBy(Klaus);
+        hkPostOffice.subscribeBy(Jason);
+        hkPostOffice.subscribeBy(Klaus);
         //when
         String mailSubject = "Greeting";
         String mailBody = "Hi Jason, i heard that you are a very good singer.";
         Mail newMailByKlaus = new Mail(Klaus.getName(),Jason.getName(),mailSubject,mailBody);
         hkPostOffice.getNewMail(newMailByKlaus);
         //when
-        String mailSubject1 = "Greeting";
-        String mailBody1 = "Hi Klaus, of course, I am the best singer ever";
-        Mail newMailByJason = new Mail(Jason.getName(),Klaus.getName(),mailSubject1,mailBody1);
+        String mailSubjectByJason = "Greeting";
+        String mailBodyByJason = "Hi Klaus, of course, I am the best singer ever";
+        Mail newMailByJason = new Mail(Jason.getName(),Klaus.getName(),mailSubjectByJason,mailBodyByJason);
         hkPostOffice.getNewMail(newMailByJason);
+        //when
+        String mailSubjectbyKlaus = "Greeting";
+        String mailBodybyKlaus = "Hi Jason, i heard that you are a very good singer.";
+        hkPostOffice.unsubscribeBy(Jason);
+        Mail newMailSendToUnsubsribe = new Mail(Klaus.getName(),Jason.getName(),mailSubjectbyKlaus,mailBodybyKlaus);
+        hkPostOffice.getNewMail(newMailSendToUnsubsribe);
     }
 }

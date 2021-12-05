@@ -2,26 +2,26 @@ package com.observerPattern;
 
 import java.util.ArrayList;
 
-public class PostOffice implements Broadcast{
+public class PostOffice implements Subject {
     private final ArrayList<Person> subscriptionList = new ArrayList<>();
 
     public void getNewMail(Mail mail){
         notification(mail);
     }
 
-    public void subscriptBy(Person person){
+    public void subscribeBy(Person person){
         subscriptionList.add(person);
     }
 
-    public void unsubscriptBy(Person person){
+    public void unsubscribeBy(Person person){
         subscriptionList.remove(person);
     }
 
     public void notification(Mail mail){
         subscriptionList.stream().filter(
-                subscriptPerson->subscriptPerson.getName().equals(mail.getReceiverName())
+                subscribePerson->subscribePerson.getName().equals(mail.getReceiverName())
                 )
                 .findFirst()
-                .ifPresent(subscriptionPerson->subscriptionPerson.update(mail));
+                .ifPresent(subscribePerson->subscribePerson.update(mail));
     }
 }

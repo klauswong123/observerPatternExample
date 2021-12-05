@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class TestObserver {
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
@@ -50,10 +49,10 @@ public class TestObserver {
         Mail newMailByJason = new Mail(Jason.getName(),Klaus.getName(),mailSubject,mailBody);
         hkPostOffice.getNewMail(newMailByJason);
         //should
-        assertEquals("Sender: Klaus\n" +
-                "Receiver: Jason\n" +
+        assertEquals("Sender: Jason\n" +
+                "Receiver: Klaus\n" +
                 "Subject: Greeting\n" +
-                "Hi Jason, i heard that you are a very good singer.",systemOut());
+                "Hi Klaus, of course, I am the best singer ever",systemOut());
     }
 
     @Test

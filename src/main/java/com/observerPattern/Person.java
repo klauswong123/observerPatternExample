@@ -12,6 +12,6 @@ public class Person implements Observer{
     }
 
     public void update(Mail mail){
-        System.out.print(mail.getMailContent());
+        if(mail.getReceiverName().equals(this.Name)) System.out.print(mail.getMailContent());
     }
 }
